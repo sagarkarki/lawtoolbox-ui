@@ -1,5 +1,14 @@
 @mixin flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin selected-gradient($color1, $color2, $color3) {
+  background-image: radial-gradient(
+    ellipse 85% 70% at 50% 80%,
+    $color1,
+    $color2 55%,
+    $color3
+  );
 }

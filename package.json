@@ -1,6 +1,6 @@
 {
   "name": "@sagarkarki/lawtoolbox-ui",
-  "version": "0.0.1007",
+  "version": "0.0.1008",
   "description": "A react component library for LawToolBox",
   "scripts": {
     "rollup": "rollup -c",

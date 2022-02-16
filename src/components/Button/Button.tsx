@@ -2,66 +2,79 @@ import React from "react";
 import "./Button.scss";
 import Loader from "../Loader/Loader";
 
+const buttonClass = "ltb-button";
 export interface ButtonProps {
-  primary?: boolean;
-  backgroundColor?: string;
-  size?: "small" | "medium" | "large";
-  label: string;
-  type?: "button" | "submit";
-  onClick?: () => void;
-  iconPosition?: "left" | "right";
-  isLoading?: boolean;
-  isDisabled?: boolean;
+  backgroundType?: "primary" | "success" | "danger" | "warning" | "muted";
+  buttonStyle?: "default" | "outlined";
   children?: React.ReactNode;
+  iconPosition?: "left" | "right";
+  isDisabled?: boolean;
+  isLoading?: boolean;
+  label?: string;
+  onClick?: () => void;
+  size?: "small" | "medium" | "large";  
+  type?: "button" | "submit";  
 }
 
 const Button = ({
-  primary = false,
-  size = "medium",
-  backgroundColor,
-  label,
+  backgroundType = "primary",
+  buttonStyle = "default",
+  children,
   iconPosition = "left",
-  type = "button",
-  isLoading = false,
   isDisabled = false,
+  isLoading = false,
+  label,
+  size = "medium",
+  type = "button",
   ...props
 }: ButtonProps) => {
+
+  const classes = [
+    buttonClass,
+    `${buttonClass}__${size}`,
+    isLoading ? `${buttonClass}__with-loader` : ``,
+    `${buttonClass}__${backgroundType}`,
+    `${buttonClass}__${buttonStyle}`,
+    (label === undefined || !label.length) ? `${buttonClass}__only-icon` : ``,
+  ].join(" ");
+
+  //Button icon component
   const ButtonIcon = () => {
     return (
       <span
         className={[
-          "ltb-button__icon",
-          `ltb-button__icon__${iconPosition}`,
+          `${buttonClass}__icon`,
+          `${buttonClass}__icon__${iconPosition}`,
         ].join(" ")}
       >
-        {props.children}
+        {children}
       </span>
     );
   };
 
+  //Button Loader component
   const ButtonLoader = () => {
     return isLoading ? (
-      <div className="ltb-button__loader">
-        <Loader size="1.2rem" color="#fff"></Loader>
+      <div className={`${buttonClass}__loader`}>
+        <Loader size="1.5em" color="#fff"></Loader>
       </div>
     ) : (
       <></>
     );
   };
 
+  const ButtonLabelBuild = () => {
+    return <span className={`${buttonClass}__label`}>{label}</span>
+  }
+
   return (
     <button
-      className={[
-        "ltb-button",
-        `ltb-button__${size}`,
-        isLoading ? `ltb-button__with-loader` : ``,
-      ].join(" ")}
-      style={{ backgroundColor }}
+      className={classes}
       disabled={isDisabled || isLoading}
       {...props}
     >
       {iconPosition === "left" ?  <ButtonIcon></ButtonIcon> : <></>}
-      {label}
+      <ButtonLabelBuild></ButtonLabelBuild>
       {iconPosition === "right" ? <ButtonIcon></ButtonIcon> : <></>}
 
       <ButtonLoader></ButtonLoader>

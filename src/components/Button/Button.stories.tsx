@@ -33,6 +33,18 @@ export default {
       control: { type: 'radio' },
       defaultValue: false,
       description: "Disables the button",
+    },
+    backgroundType: {
+      options: ["primary", "success", "danger", "warning", "muted"],
+      control: {type: "select"},
+      description: "Sets button background type from predefined types",
+      defaultValue: "primary"
+    },
+    buttonStyle: {
+      options: ["default", "outlined"],
+      control: {type: "select"},
+      description: "Sets button style type",
+      defaultValue: "default"
     }
   }
 } as ComponentMeta<typeof Button>;
@@ -41,5 +53,5 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} >{el
 
 export const Primary = Template.bind({});
 Primary.args = {
- label: "Buttons",
+ label: "",
 };
