@@ -28,7 +28,10 @@ export default [
       peerDepsExternal(),
       resolve(),
       commonjs(),
-      typescript({ tsconfig: "./tsconfig.json" }),
+      typescript({ 
+        tsconfig: "./tsconfig.json", 
+        exclude: ["*.test.ts+(|x)", "**/*.test.ts+(|x)", "*.stories.ts+(|x)", "**/*.stories.ts+(|x)"] 
+      }),
       postcss(),
       terser(),
     ],
@@ -37,6 +40,6 @@ export default [
     input: "dist/esm/types/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "esm" }],
     plugins: [dts()],
-    external: [/\.css$/]
+    external: [/\.scss$/, /\.css$/]
   },
 ];

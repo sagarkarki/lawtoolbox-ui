@@ -1,0 +1,86 @@
+@import "../../sytles/index.scss";
+
+.ltb-button {
+  border-radius: 0.3rem;
+  border: none;
+  font-weight: 500;
+  height: 1.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.8rem;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse 85% 70% at 50% 80%,
+    #a6d3ff,
+    #4393e0 55%,
+    #2278cb
+  );
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  &::after {
+    content: "";
+    transition: all 0.2s ease-in-out;
+  }
+  &:hover {
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(
+        ellipse 85% 70% at 50% 80%,
+        #27292b14,
+        #24272b14 55%,
+        #06070814
+      );
+    }
+  }
+
+  &__small {
+    height: 1.5rem;
+  }
+  &__large {
+    height: 2rem;
+  }
+
+  &__icon {
+    display: inline-block;
+    margin-right: 0.5rem;
+    &__left {
+    }
+    &__right {
+      display: inline-block;
+      margin-left: 0.5rem;
+    }
+    svg {
+      height: 1rem;
+      width: 1rem;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  &__with-loader {
+    &:disabled {
+      opacity: 1;
+    }
+  }
+  &__loader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    background-color: rgba(0, 0, 0, 0.1);
+    @include flex-center;
+    border-radius: 0.3rem;
+  }
+}
