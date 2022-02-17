@@ -1,0 +1,19 @@
+@import "../../sytles/variables.scss";
+
+.ltb-toaster {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: $toaster-index;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+
+  column-gap: 0.5rem;
+
+  &__toast {
+    padding: 0.5rem 1rem;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+  }
+}
