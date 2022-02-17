@@ -11,9 +11,9 @@ export interface ButtonProps {
   isDisabled?: boolean;
   isLoading?: boolean;
   label?: string;
-  onClick?: () => void;
-  size?: "small" | "medium" | "large";  
-  type?: "button" | "submit";  
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  size?: "small" | "medium" | "large";
+  type?: "button" | "submit";
 }
 
 const Button = ({
@@ -28,14 +28,13 @@ const Button = ({
   type = "button",
   ...props
 }: ButtonProps) => {
-
   const classes = [
     buttonClass,
     `${buttonClass}__${size}`,
     isLoading ? `${buttonClass}__with-loader` : ``,
     `${buttonClass}__${backgroundType}`,
     `${buttonClass}__${buttonStyle}`,
-    (label === undefined || !label.length) ? `${buttonClass}__only-icon` : ``,
+    label === undefined || !label.length ? `${buttonClass}__only-icon` : ``,
   ].join(" ");
 
   //Button icon component
@@ -64,16 +63,19 @@ const Button = ({
   };
 
   const ButtonLabelBuild = () => {
-    return <span className={`${buttonClass}__label`}>{label}</span>
-  }
+    return <span className={`${buttonClass}__label`}>{label}</span>;
+  };
 
   return (
     <button
       className={classes}
       disabled={isDisabled || isLoading}
       {...props}
+      onClick={(event) => {
+        if (props.onClick) props.onClick(event);
+      }}
     >
-      {iconPosition === "left" ?  <ButtonIcon></ButtonIcon> : <></>}
+      {iconPosition === "left" ? <ButtonIcon></ButtonIcon> : <></>}
       <ButtonLabelBuild></ButtonLabelBuild>
       {iconPosition === "right" ? <ButtonIcon></ButtonIcon> : <></>}
 
