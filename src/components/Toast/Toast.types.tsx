@@ -1,5 +1,5 @@
 export interface ToastElement {
-    id: number;
+    id?: number;
     title?: string;
     description: string;
     type?: "primary" | "success" | "danger" | "warning" | "loader";

@@ -14,16 +14,36 @@ export default {
 } as ComponentMeta<typeof ToasterProvider>;
 
 const Todos = () => {
-  const { toasts, pushToast, popToast } = useContext(ToasterContext);
-  const toast: ToastElement = {
-    id: Date.now(),
-    title: "Success",
-    description: "You have created a new case.",
-    type: "primary",
-    children: element,
-  };
+  const { pushToast } = useContext(ToasterContext);
+
+  function getToast(
+    title?: string,
+    type?: "primary" | "success" | "danger" | "warning" | "loader"
+  ): ToastElement {
+    const toast: ToastElement = {
+      title: title ?? "Primary",
+      description: "You have created a new toast.",
+      type: type ?? "primary",
+      children: element,
+    };
+    return toast;
+  }
   return (
-    <button onClick={() => pushToast(toast)}>add todo</button>
+    <div>
+      <button onClick={() => pushToast(getToast())}>Primary toast</button>
+      <button onClick={() => pushToast(getToast("Success", "success"))}>
+        Success toast
+      </button>
+      <button onClick={() => pushToast(getToast("Danger", "danger"))}>
+        Danger toast
+      </button>
+      <button onClick={() => pushToast(getToast("Warning", "warning"))}>
+        Warning toast
+      </button>
+      <button onClick={() => pushToast(getToast("Loadergj", "loader"))}>
+        Loader toast
+      </button>
+    </div>
   );
 };
 

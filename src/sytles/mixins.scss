@@ -12,3 +12,11 @@
     $color3
   );
 }
+@mixin size($height, $width : 0) {
+  height: $height;
+  @if $width != 0 {
+    width: $width;
+  } @else {
+    width: $height;
+  }
+}

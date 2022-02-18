@@ -23,7 +23,6 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
             y="-100%"
             width="300%"
             height="300%"
-            color-interpolation-filters="sRGB"
           >
             <feGaussianBlur
               in="SourceGraphic"
