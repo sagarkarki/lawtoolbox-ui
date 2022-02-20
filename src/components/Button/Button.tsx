@@ -39,7 +39,7 @@ const Button = ({
 
   //Button icon component
   const ButtonIcon = () => {
-    return (
+    return children ? (
       <span
         className={[
           `${buttonClass}__icon`,
@@ -48,6 +48,8 @@ const Button = ({
       >
         {children}
       </span>
+    ) : (
+      <> </>
     );
   };
 

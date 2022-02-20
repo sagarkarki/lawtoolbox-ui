@@ -1,0 +1,55 @@
+@import "../../sytles/variables.scss";
+@import "../../sytles/mixins.scss";
+
+.ltb-dialog {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    @include flex-center;
+    z-index: $dialog-index;
+    top: 0;
+    left: 0;
+    background: url("https://picresize.com/images/t62122e765933c.png?448054");
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    &__backdrop {
+        background-color: rgba($color: #000000, $alpha: 0.2);
+        backdrop-filter: blur(3px);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    &__body {
+        background-color: $card-color;
+        border-radius: $border-radius;
+    }
+
+    &__title {
+        height: 2rem;
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__content {
+        padding: 1rem;
+    }
+
+    &__action {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 1rem;
+        column-gap: .5rem;
+    }
+
+    &.md {
+        .ltb-dialog__body {
+            width: clamp(15rem, 15rem, 20rem);
+        }
+    }
+}

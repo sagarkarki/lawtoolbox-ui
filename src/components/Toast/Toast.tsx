@@ -1,5 +1,4 @@
 import React, { createContext, useState, FC, useEffect } from "react";
-import { Loader } from "..";
 import "./Toast.scss";
 import { ToastElement, ToastTypes } from "./Toast.types";
 import LtbIcon, { IconType } from "../Icons/Icons";
