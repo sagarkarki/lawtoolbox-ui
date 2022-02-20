@@ -1,11 +1,7 @@
 import React, { useContext } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import ToasterProvider, { ToasterContext } from "./Toast";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { ToastElement } from "./Toast.types";
-
-const element = <FontAwesomeIcon icon={faCoffee} />;
 
 export default {
   title: "LawToolBox/Toaster",
@@ -13,7 +9,7 @@ export default {
   argTypes: {},
 } as ComponentMeta<typeof ToasterProvider>;
 
-const Todos = () => {
+const Buttons = () => {
   const { pushToast } = useContext(ToasterContext);
 
   function getToast(
@@ -50,7 +46,7 @@ const Todos = () => {
 const Template: ComponentStory<typeof ToasterProvider> = () => {
   return (
     <ToasterProvider>
-      <Todos></Todos>
+      <Buttons></Buttons>
     </ToasterProvider>
   );
 };

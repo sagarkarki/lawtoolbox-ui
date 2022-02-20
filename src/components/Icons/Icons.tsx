@@ -1,5 +1,5 @@
 import React from "react";
-import { Loader } from "..";
+import Loader from "../Loader";
 
 export type IconType =
   | "badge-check"
