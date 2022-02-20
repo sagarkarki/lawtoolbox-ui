@@ -24,7 +24,7 @@ const Todos = () => {
       title: title ?? "Primary",
       description: "You have created a new toast.",
       type: type ?? "primary",
-      children: element,
+      // children: element,
     };
     return toast;
   }

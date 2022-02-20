@@ -5,23 +5,52 @@
   @each $key, $val in $toast-types {
     .ltb-toaster__toast {
       &__#{$key} {
+        .ltb-toaster__toast__icon {
+          @include flex-center;
+          color: $val;
+          svg {
+            @include size(1.4rem);
+          }
+        }
+
         @if $key == "loader" {
           background-color: $primary-color;
           color: #fff;
+          .ltb-toaster__toast__icon {
+            color: #fff;
+            svg {
+              @include size(1.6rem);
+            }
+          }
         } @else {
           background-image: radial-gradient(
             ellipse 15% 100% at 0%,
             rgba($val, 0.5),
             rgba(#000, 0.1)
           );
-        }
 
-        .ltb-toaster__toast__icon {
-          padding: 5px;
-          border-radius: 50%;
-          background-color: rgba($val, 0.7);
-          color: #fff;
-          @include flex-center;
+          &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 1.5px;
+            width: 100%;
+            background-color: rgba($success-color, 1);
+            animation: toast-progress 4000ms linear forwards;
+            z-index: 1;
+
+            @keyframes toast-progress {
+              from {
+                width: 100%;
+                background-color: rgba($success-color, 1);
+              }
+              to {
+                width: 0%;
+                background-color: rgba($val, 1);
+              }
+            }
+          }
         }
       }
     }
@@ -49,7 +78,9 @@
     flex-direction: row;
     align-items: center;
     column-gap: 0.5rem;
-    
+
+    position: relative;
+
     transform: translateY(100%);
     opacity: 0;
     animation: add-toast 0.2s linear forwards;

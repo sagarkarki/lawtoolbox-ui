@@ -15,6 +15,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
         height={size}
         viewBox="0 0 100 100"
         preserveAspectRatio="xMidYMid"
+        
       >
         <defs>
           <filter
@@ -48,7 +49,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="0"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -69,7 +70,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="1"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -90,7 +91,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="2"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -111,7 +112,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="3"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -132,7 +133,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="4"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -153,7 +154,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="5"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -174,7 +175,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="6"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -195,7 +196,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="7"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -216,7 +217,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="8"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -237,7 +238,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="9"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -258,7 +259,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="10"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -279,7 +280,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="11"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -300,7 +301,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="12"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -321,7 +322,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="13"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -342,7 +343,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="14"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -363,7 +364,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="15"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -384,7 +385,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="16"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -405,7 +406,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="17"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -426,7 +427,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="18"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>
@@ -447,7 +448,7 @@ const Loader = ({ size = "1rem", color = "#93dbe9" }: LoaderProps) => {
                 cx="0"
                 cy="0"
                 r="19"
-                fill={color}
+                fill="currentColor"
                 transform="scale(0.6100000000000001)"
               ></circle>
             </g>

@@ -1,7 +1,14 @@
+export type ToastTypes =
+  | "primary"
+  | "success"
+  | "danger"
+  | "warning"
+  | "loader";
+
 export interface ToastElement {
-    id?: number;
-    title?: string;
-    description: string;
-    type?: "primary" | "success" | "danger" | "warning" | "loader";
-    children?: React.ReactNode;
-};
+  id?: number;
+  title?: string;
+  description: string;
+  type?: ToastTypes;
+  children?: React.ReactNode;
+}

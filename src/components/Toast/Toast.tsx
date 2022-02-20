@@ -1,11 +1,19 @@
 import React, { createContext, useState, FC, useEffect } from "react";
 import { Loader } from "..";
 import "./Toast.scss";
-import { ToastElement } from "./Toast.types";
-import LtbIcon from "../Icons/Icons";
+import { ToastElement, ToastTypes } from "./Toast.types";
+import LtbIcon, { IconType } from "../Icons/Icons";
 
 const className = "ltb-toaster";
-const toastDuration = 2000;
+const toastDuration = 4000;
+type toastDefaultIconsTypes = { [keys in ToastTypes]: IconType };
+const toastDefaultIcons: toastDefaultIconsTypes = {
+  primary: "info",
+  success: "check-circle",
+  danger: "error",
+  warning: "warning",
+  loader: "loader",
+};
 
 export type ToastContextState = {
   toasts: ToastElement[];
@@ -32,21 +40,25 @@ const ToasterProvider: FC = ({ children }) => {
   );
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (toasts.filter((el) => el.type !== "loader").length) {
-        removeToast(toasts.filter((el) => el.type !== "loader")[0].id);
-      }
-    }, toastDuration);
-
+    var interval: NodeJS.Timer;
+    interval = setInterval(() => {
+      toasts.forEach((el) => {
+        if (el.type !== "loader" && Date.now() - (el.id || 0) > toastDuration)
+          removeToast(el.id);
+      });
+      if (toasts.length === toasts.filter((el) => el.type === "loader").length)
+        clearInterval(interval);
+    }, 100);
     return () => {
       clearInterval(interval);
     };
   }, [toasts]);
 
   const removeToast = (id?: number) => {
-    const listItemIndex = toasts.findIndex((e) => e.id === id);
-    toasts.splice(listItemIndex, 1);
-    setToast([...toasts]);
+    const currentToasts = [...toasts];
+    const listItemIndex = currentToasts.findIndex((e) => e.id === id);
+    currentToasts.splice(listItemIndex, 1);
+    setToast([...currentToasts]);
   };
 
   const pushToast = (toast: ToastElement) => {
@@ -55,16 +67,14 @@ const ToasterProvider: FC = ({ children }) => {
     return toast.id;
   };
 
-  const toastIconBuild = (icon?: React.ReactNode) => {
-    return icon ? (
-      <div className={`${className}__toast__icon`}>{icon}</div>
-    ) : (
-      <></>
+  const toastIconBuild = (toast: ToastElement) => {
+    return (
+      <div className={`${className}__toast__icon`}>
+        {toast.children ?? (
+          <LtbIcon icon={toastDefaultIcons[toast.type || "primary"]}></LtbIcon>
+        )}
+      </div>
     );
-  };
-
-  const toastLoaderBuild = () => {
-    return <Loader size="2rem" color="#fff"></Loader>;
   };
 
   const toastTextContentBuild = (description: string, title?: string) => {
@@ -105,9 +115,7 @@ const ToasterProvider: FC = ({ children }) => {
             ].join(" ")}
             key={toast.id}
           >
-            {toast.type === "loader"
-              ? toastLoaderBuild()
-              : toastIconBuild(toast.children)}
+            {toastIconBuild(toast)}
             {toastTextContentBuild(toast.description, toast.title)}
             {toast.type === "loader" ? (
               <></>
