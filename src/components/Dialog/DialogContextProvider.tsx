@@ -1,52 +1,70 @@
-import React, { useState } from "react";
-import Button from "../Button";
-import Dialog, { DialogTitle, DialogContent, DialogActions } from "./Dialog";
-import { DialogContext } from "./DialogContext";
-import { DialogProps } from "./DialogTypes";
+// eslint-disable-next-line no-use-before-define
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import ReactDOM from 'react-dom';
 
-const DialogProvider = ({ ...props }) => {
-  const [dialogs, setDialogs] = useState<DialogProps[]>([]);
+import { HandlerRef, DialogProviderProps } from './DialogTypes'
 
-  const onOpen = (dialogData: DialogProps) => {
-    setDialogs([...dialogs, dialogData]);
-  };
+import withHandle from './WithHandle'
 
-  const onClose = () => {};
+import DialogContext from './DialogContext'
 
-  const okCallback = () => {};
+/**
+ * Provider
+ */
+export const DialogProvider = ({
+  parent,
+  children,
+  Component
+}: DialogProviderProps) => {
+  const [show, setShow] = useState(false)
+  const [props, setProps] = useState<unknown>()
+  const containerRef = useRef<HTMLElement | null>(null)
+  const alertRef = useRef<HandlerRef>(null)
 
-  const cancelCallback = (index: number) => {
-    console.log(index);
-    const currentDialogs = [...dialogs];
-    currentDialogs.splice(index, 1);
-    setDialogs([...currentDialogs]);
-  };
+  const setShowFn = useCallback(
+    (value: boolean) => {
+      setShow(value)
+
+      if (value) {
+        if (!containerRef.current) {
+          const divElement = document.createElement('div')
+          containerRef.current = divElement
+        }
+
+        if (parent) parent.appendChild(containerRef.current)
+        else document.body.appendChild(containerRef.current)
+      }
+
+      if (!value && containerRef.current) {
+        (containerRef.current as HTMLElement).remove()
+        containerRef.current = null
+      }
+    },
+    [setShow, parent]
+  )
+
+  const setPropsFn = useCallback((props: any) => setProps(props), [])
+
+  const container = containerRef.current
+  const RenderComponent = withHandle(Component, containerRef)
+
+  useEffect(() => () => container?.remove(), [container])
 
   return (
-    <DialogContext.Provider value={{ okCallback, onOpen, onClose }}>
-      {props.children}
-
-      {dialogs.map((dialog, index) => (
-        <Dialog maxWidth={dialog.size} key={index}>
-          {<DialogTitle>{dialog.title}</DialogTitle>}
-          <DialogContent>{dialog.component}</DialogContent>
-          <DialogActions>
-            <Button
-              onClick={() => cancelCallback(index)}
-              backgroundType="muted"
-              buttonStyle="outlined"
-              label="Cancel"
-            ></Button>
-            <Button
-              onClick={okCallback}
-              backgroundType="success"
-              label="Ok"
-            ></Button>
-          </DialogActions>
-        </Dialog>
-      ))}
+    <DialogContext.Provider
+      value={{
+        show,
+        setShow: setShowFn,
+        setProps: setPropsFn,
+        alertRef
+      }}
+    >
+      {container &&
+        ReactDOM.createPortal(
+          show && <RenderComponent ref={alertRef} {...props} />,
+          container
+        )}
+      {children}
     </DialogContext.Provider>
-  );
-};
-
-export default DialogProvider;
+  )
+}

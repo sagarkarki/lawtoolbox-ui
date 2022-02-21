@@ -1,10 +1,8 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Button from "./Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import LtbIcon from "../Icons/Icons";
 
-const element = <FontAwesomeIcon icon={faCoffee} />;
 
 export default {
   title: "LawToolBox/Button",
@@ -52,7 +50,7 @@ export default {
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = (args) => (
-  <Button {...args}>{element}</Button>
+  <Button {...args}>{<LtbIcon icon="error"></LtbIcon>}</Button>
 );
 
 export const Primary = Template.bind({});

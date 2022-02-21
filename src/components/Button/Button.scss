@@ -7,49 +7,17 @@
   @include flex-center;
   position: relative;
   overflow: hidden;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
   color: #fff;
-  
+
   transition: all 0.2s linear;
 
-  @include selected-gradient(
-    nth($gradient-primary, 1),
-    nth($gradient-primary, 2),
-    nth($gradient-primary, 3)
-  );
-  &__success {
-    @include selected-gradient(
-      nth($gradient-success, 1),
-      nth($gradient-success, 2),
-      nth($gradient-success, 3)
-    );
-    outline-color: rgba($primary-color, 0.3);
-  }
-  &__danger {
-    @include selected-gradient(
-      nth($gradient-danger, 1),
-      nth($gradient-danger, 2),
-      nth($gradient-danger, 3)
-    );
-    outline-color: rgba($danger-color, 0.3);
-  }
+  box-shadow: var(--shadow-elevation-low);
+
   &__warning {
-    @include selected-gradient(
-      nth($gradient-warning, 1),
-      nth($gradient-warning, 2),
-      nth($gradient-warning, 3)
-    );
     color: $muted-font-color;
-    outline-color: rgba($warning-color, 0.3);
   }
   &__muted {
-    @include selected-gradient(
-      nth($gradient-muted, 1),
-      nth($gradient-muted, 2),
-      nth($gradient-muted, 3)
-    );
     color: $primary-font-color;
-    outline-color: rgba($muted-font-color, 0.3);
   }
 
   &::after {
@@ -57,12 +25,8 @@
     transition: all 0.2s ease-in-out;
   }
 
-  outline: 0px solid transparent;
-  outline-offset: 0em;
   &:hover {
-    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-    outline-width: 2px;
-    outline-offset: 0.1em;
+    box-shadow: var(--shadow-elevation-medium);
     cursor: pointer;
     &::after {
       content: "";
@@ -71,18 +35,15 @@
       left: 0;
       width: 100%;
       height: 100%;
-      @include selected-gradient(
-        nth($gradient-hover, 1),
-        nth($gradient-hover, 2),
-        nth($gradient-hover, 3)
-      );
+      @include gradient-bg(0, "muted", 1);
     }
   }
 
-  font-size: 0.76rem;
-  padding: 0.2em 0.8em;
+  font-size: 0.8rem;
+  padding: 0.3em 0.8em;
+  font-weight: 500;
   &__small {
-    font-size: 0.68em;
+    font-size: 0.7em;
   }
   &__large {
     font-size: 0.9em;
@@ -92,7 +53,8 @@
     font-size: 1em;
   }
   &__icon {
-    display: inline-block;
+    @include flex-center;
+
     &__left {
       margin-right: 0.5em;
     }
@@ -100,8 +62,7 @@
       margin-left: 0.5em;
     }
     svg {
-      height: 1.5em;
-      width: 1.5em;
+      @include size(1.3em);
     }
   }
 
@@ -123,6 +84,10 @@
     background-color: rgba(0, 0, 0, 0.1);
     @include flex-center;
     border-radius: 0.3rem;
+
+    svg {
+      color: #fff;
+    }
   }
 
   &__only-icon {
@@ -135,28 +100,36 @@
   }
 
   &__outlined {
-      background-image: none;
-      background-color: transparent;
-      &.ltb-button {
-        color: $primary-color;
-        border: 1px solid $primary-color;
-        box-shadow: none;
-        &__success {
-            color: $success-color;
-            border-color: $success-color;
-          }
-          &__danger {
-            color: $danger-color;
-            border-color: $danger-color;
-          }
-          &__warning {
-            color: $warning-color;
-            border-color: $warning-color;
-          }
-          &__muted {
-            color: $primary-font-color;
-            border-color: $primary-font-color;
-          }
+    background-image: none;
+    background-color: transparent;
+    &.ltb-button {
+      color: $primary-color;
+      border: 1px solid $primary-color;
+      box-shadow: none;
+      &__success {
+        color: $success-color;
+        border-color: $success-color;
       }
+      &__danger {
+        color: $danger-color;
+        border-color: $danger-color;
+      }
+      &__warning {
+        color: $warning-color;
+        border-color: $warning-color;
+      }
+      &__muted {
+        color: $primary-font-color;
+        border-color: $primary-font-color;
+      }
+    }
+  }
+}
+
+@each $key, $val in $button-colors {
+  .ltb-button__#{$key} {
+    @include gradient-bg(nth(nth($val, 1), 1), $key);
+    // outline-color: rgba(nth($val, 2), 0.3);
+    color: nth($val, 3);
   }
 }

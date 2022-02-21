@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import DialogProvider from "./DialogContextProvider";
-import {DialogContext} from "./DialogContext";
-import { DialogProps } from "./DialogTypes";
+import { DialogProvider, useDialog } from "./index";
+import Dialog from "./Dialog";
 
 export default {
   title: "LawToolBox/Dialog",
@@ -11,26 +10,30 @@ export default {
 } as ComponentMeta<typeof DialogProvider>;
 
 const Buttons = () => {
-  const { onOpen } = useContext(DialogContext);
-    const dialog: DialogProps  = {
-        title: "Delete",
-        component: <div>Hello i am dialog body</div>
-    }
-  return (
-    <div>
-      <button onClick={() => onOpen(dialog)}>Primary toast</button>
-    </div>
-  );
+  const dialog = useDialog({
+    ok: "ok",
+    cancel: "cancel",
+  });
+
+  const Body = () => {
+    return <div>hello i am athe body</div>;
+  };
+
+  function handleClick() {
+    dialog({ title: "Warning!", content: <Body></Body> })
+      .then(console.log)
+      .catch(console.error);
+  }
+
+  return <button onClick={handleClick}>click here</button>;
 };
 
 const Template: ComponentStory<typeof DialogProvider> = () => {
   return (
-    <DialogProvider>
+    <DialogProvider Component={({ ...props }) => <Dialog {...props} />}>
       <Buttons></Buttons>
     </DialogProvider>
   );
 };
 
 export const Primary = Template.bind({});
-// Primary.args = {
-// };

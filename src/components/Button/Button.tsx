@@ -14,6 +14,7 @@ export interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   size?: "small" | "medium" | "large";
   type?: "button" | "submit";
+  [keys:string]: any
 }
 
 const Button = ({

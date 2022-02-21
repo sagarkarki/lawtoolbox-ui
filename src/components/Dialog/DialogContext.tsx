@@ -1,14 +1,12 @@
-import { Context, createContext } from "react";
-import {OpenDialogType} from "./DialogTypes";
+import { createContext } from 'react'
 
-const defaultDialogContextValue: OpenDialogType = {
-  okCallback: () => {},
-  cancelCallback: () => {},
-  onOpen: () => {},
-  onClose: () => {},
-};
+import { DialogContextProps } from './DialogTypes'
 
-export const DialogContext: Context<OpenDialogType> = createContext(
-  defaultDialogContextValue
-);
+const DialogContext = createContext<DialogContextProps>({
+  show: false,
+  setShow: undefined,
+  setProps: undefined,
+  alertRef: { current: null }
+})
 
+export default DialogContext

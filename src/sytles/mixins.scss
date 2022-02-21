@@ -12,11 +12,28 @@
     $color3
   );
 }
-@mixin size($height, $width : 0) {
+@mixin size($height, $width: 0) {
   height: $height;
   @if $width != 0 {
     width: $width;
   } @else {
     width: $height;
   }
+}
+
+@mixin gradient-bg($hue: 0, $type: "primary", $isLight: 0) {
+  $saurations: (100%, 78%, 69%);
+  $alpha: 1;
+  @if ($type == "muted") {
+    $saurations: (0, 0, 0);
+  }
+  @if($isLight == 1) {
+    $alpha: 0.1;
+  }
+  background: radial-gradient(
+    137.86% 112.14% at 50% 100%,
+    hsla($hue, nth($saurations, 1), 77%, $alpha) 0%,
+    hsla($hue, nth($saurations, 2), 48%, $alpha) 49.24%,
+    hsla($hue, nth($saurations, 3), 35%, $alpha) 100%
+  );
 }
