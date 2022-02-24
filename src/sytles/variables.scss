@@ -4,7 +4,7 @@ $primary-color: #1492e6;
 $danger-color: #e02929;
 $warning-color: #eed03c;
 $success-color: #1dbf29;
-$muted-color: #585858;
+$muted-color: #595959;
 
 $background-color: #ebeff3;
 
@@ -12,7 +12,7 @@ $primary-color-hsl: (210, 84, 49);
 $danger-color-hsl: (0, 75, 52);
 $warning-color-hsl: (50, 84, 58);
 $success-color-hsl: (124, 74, 43);
-$muted-color-hsl: (0, 84, 35);
+$muted-color-hsl: (0, 0, 35);
 
 $primary-font-color: #000;
 $muted-font-color: #585858;
@@ -61,7 +61,7 @@ $button-colors: (
   "warning": (
     $warning-color-hsl,
     $warning-color,
-    #000,
+    #574c15,
   ),
   "muted": (
     $muted-color-hsl,
@@ -77,6 +77,11 @@ $button-colors: (
     0.2px 0.2px 0.4px hsl(var(--shadow-color) / 0),
     0.4px 0.5px 1px hsl(var(--shadow-color) / 0.1),
     1px 1.2px 2.3px hsl(var(--shadow-color) / 0.21);
+    --shadow-elevation-low-medium:
+    0.2px 0.2px 0.4px hsl(var(--shadow-color) / 0),
+    0.9px 1.1px 2.1px hsl(var(--shadow-color) / 0.05),
+    1.7px 2px 3.9px hsl(var(--shadow-color) / 0.11),
+    2.9px 3.3px 6.6px hsl(var(--shadow-color) / 0.21);
   --shadow-elevation-medium:
     0.2px 0.2px 0.4px hsl(var(--shadow-color) / 0),
     0.9px 1.1px 2.1px hsl(var(--shadow-color) / 0.05),
@@ -95,3 +100,8 @@ $button-colors: (
     23.3px 26.9px 53.4px hsl(var(--shadow-color) / 0.2),
     29.9px 34.6px 68.6px hsl(var(--shadow-color) / 0.22);
 }
+
+
+//Transition
+$transition-duration: 150ms;
+$transition-timing-fxn: ease-in-out;

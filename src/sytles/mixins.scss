@@ -21,19 +21,21 @@
   }
 }
 
-@mixin gradient-bg($hue: 0, $type: "primary", $isLight: 0) {
-  $saurations: (100%, 78%, 69%);
-  $alpha: 1;
-  @if ($type == "muted") {
-    $saurations: (0, 0, 0);
-  }
-  @if($isLight == 1) {
-    $alpha: 0.1;
-  }
-  background: radial-gradient(
-    137.86% 112.14% at 50% 100%,
-    hsla($hue, nth($saurations, 1), 77%, $alpha) 0%,
-    hsla($hue, nth($saurations, 2), 48%, $alpha) 49.24%,
-    hsla($hue, nth($saurations, 3), 35%, $alpha) 100%
-  );
+@mixin gradient-bg($hue: 0, $sat, $type: "primary", $hover: 0) {
+  $grad-color-1: hsla($hue, $sat, 49%, 0.6);
+  $grad-color-2: hsla($hue, $sat, 49%, 0);
+  background: linear-gradient(90deg, $grad-color-1, $grad-color-2 33%),
+    linear-gradient(135deg, $grad-color-1 33%, $grad-color-2 70%),
+    linear-gradient(180deg, $grad-color-1 70%, $grad-color-2 94%),
+    linear-gradient(225deg, $grad-color-1 33%, $grad-color-2 73%),
+    linear-gradient(270deg, $grad-color-1, $grad-color-2 33%),
+    linear-gradient(
+      0deg,
+      hsla($hue, $sat, 65%, 0.75) 6%,
+      rgba($hue, 100, 167, 0) 70%
+    );
+}
+
+@mixin transition($transitionFxn: ease-in-out, $duration: $transition-duration ) {
+  transition: all $duration $transitionFxn;
 }

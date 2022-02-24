@@ -1,55 +1,138 @@
 @import "../../sytles/variables.scss";
 @import "../../sytles/mixins.scss";
 
-.ltb-dialog {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    @include flex-center;
-    z-index: $dialog-index;
-    top: 0;
-    left: 0;
-    background: url("https://picresize.com/images/t62122e765933c.png?448054");
-    background-size: cover;
-    background-repeat: no-repeat;
-
-    &__backdrop {
-        background-color: rgba($color: #000000, $alpha: 0.2);
-        backdrop-filter: blur(3px);
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
-
-    &__body {
-        background-color: $card-color;
-        border-radius: $border-radius;
-    }
-
-    &__title {
-        height: 2rem;
-        padding: 0 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    &__content {
-        padding: 1rem;
-    }
-
-    &__action {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        padding: 1rem;
-        column-gap: .5rem;
-    }
-
-    &.md {
-        .ltb-dialog__body {
-            width: clamp(15rem, 15rem, 20rem);
+@mixin animate-dialog-content($delay: 300ms) {
+  .ltb-dialog__body {
+    @for $i from 1 through 5 {
+      > *:nth-child(#{$i}) {
+        opacity: 0;
+        transform: translateY(50px);
+        animation: animate-dialog-body
+          $transition-duration
+          $transition-timing-fxn
+          (250ms + 30 * ($i - 1))
+          forwards;
+        @keyframes animate-dialog-body {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0px);
+          }
         }
+      }
     }
+  }
 }
+
+.ltb-dialog {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  @include flex-center;
+  z-index: $dialog-index;
+  top: 0;
+  left: 0;
+
+  &__backdrop {
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    opacity: 0;
+    backdrop-filter: blur(0);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    animation: animate-dialog-backdrop $transition-duration
+      $transition-timing-fxn forwards;
+    @keyframes animate-dialog-backdrop {
+      from {
+        opacity: 0;
+        backdrop-filter: blur(0);
+      }
+      to {
+        opacity: 1;
+        backdrop-filter: blur(3px);
+      }
+    }
+  }
+
+  &__body {
+    background-color: $card-color;
+    border-radius: $border-radius;
+    width: clamp(10rem, 300px, 90vw);
+
+    opacity: 0;
+    transform: translateY(50px) scale(0.8);
+
+    animation: animate-dialog-body $transition-duration $transition-timing-fxn
+      150ms forwards;
+    @keyframes animate-dialog-body {
+      from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+      }
+    }
+  }
+
+  &__title {
+    height: 3rem;
+    padding: 0 2rem;
+    @include flex-center;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  &__image {
+    height: 10rem;
+    object-fit: cover;
+    overflow: hidden;
+    @include flex-center;
+    svg {
+      height: 100%;
+    }
+  }
+  &__content {
+    padding: 1rem 2rem;
+    @include flex-center;
+    font-size: 0.9rem;
+    color: $muted-font-color;
+  }
+  &__action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1rem 2rem;
+    column-gap: 0.5rem;
+  }
+
+  &.md {
+    .ltb-dialog__body {
+      width: clamp(15rem, 15rem, 20rem);
+    }
+  }
+
+  &.without-image {
+    .ltb-dialog {
+      &__title {
+        text-align: left;
+        justify-content: start;
+      }
+
+      &__content {
+        padding-top: 0.5rem;
+        @include animate-dialog-content(350ms);
+      }
+      &__action {
+        @include animate-dialog-content(400ms);
+      }
+    }
+  }
+}
+
+@include animate-dialog-content;

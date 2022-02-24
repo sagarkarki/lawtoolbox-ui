@@ -17,11 +17,26 @@ export interface DialogContentProps {
 }
 
 export const DialogTitle = ({ children }: DialogTitleProps) => {
-  return <div className={`${dialogClass}__title`}>{children}</div>;
+  return children ? (
+    <div className={`${dialogClass}__title`}>{children}</div>
+  ) : (
+    <></>
+  );
 };
 
 export const DialogContent = ({ children }: DialogContentProps) => {
-  return <div className={`${dialogClass}__content`}>{children}</div>;
+  return children ? (
+    <div className={`${dialogClass}__content`}>{children}</div>
+  ) : (
+    <></>
+  );
+};
+export const DialogImage = ({ children }: DialogContentProps) => {
+  return children ? (
+    <div className={`${dialogClass}__image`}>{children}</div>
+  ) : (
+    <></>
+  );
 };
 
 export const DialogActions = () => {
@@ -32,23 +47,33 @@ export const DialogActions = () => {
         label="Cancel"
         type="button"
         backgroundType="muted"
+        buttonStyle="outlined"
+        size="large"
       ></Button>
       <Button
         name="ok"
         id="ok"
         label="Ok"
         type="button"
-        backgroundType="success"
+        backgroundType="danger"
+        size="large"
       ></Button>
     </div>
   );
 };
 
-const Dialog = ({ title, content }: DialogProps) => {
+const Dialog = ({ title, content, image }: DialogProps) => {
+  const withImage = !!image;
   return (
-    <div className={[dialogClass].join(" ")}>
+    <div
+      className={[dialogClass, withImage ? "with-image" : "without-image"].join(
+        " "
+      )}
+    >
       <div className={`${dialogClass}__body`}>
         <DialogTitle>{title}</DialogTitle>
+        <DialogImage>{image}</DialogImage>
+
         <DialogContent>{content}</DialogContent>
         <DialogActions></DialogActions>
       </div>

@@ -14,7 +14,7 @@ export interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   size?: "small" | "medium" | "large";
   type?: "button" | "submit";
-  [keys:string]: any
+  [keys: string]: any;
 }
 
 const Button = ({
@@ -36,6 +36,7 @@ const Button = ({
     `${buttonClass}__${backgroundType}`,
     `${buttonClass}__${buttonStyle}`,
     label === undefined || !label.length ? `${buttonClass}__only-icon` : ``,
+    children == null ? `${buttonClass}__only-label` : ``,
   ].join(" ");
 
   //Button icon component

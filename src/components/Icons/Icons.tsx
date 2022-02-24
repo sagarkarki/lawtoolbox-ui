@@ -10,7 +10,7 @@ export type IconType =
   | "loader"
   | "warning";
 export interface iconDefination {
-  [key: string]: React.SVGProps<SVGSVGElement>;
+  [key: string]: React.SVGProps<SVGElement>;
 }
 
 export const icons: iconDefination = {
